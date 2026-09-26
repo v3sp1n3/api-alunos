@@ -58,7 +58,7 @@ class AlunoService {
         return aluno;
     }
 
-    async update(id, data) {
+        async update(id, data) {
         const alunoExistente = await prisma.aluno.findUnique({
             where: {
                 id: Number(id)
@@ -84,6 +84,24 @@ class AlunoService {
         });
 
         return aluno;
+    }
+
+    async delete(id) {
+        const alunoExistente = await prisma.aluno.findUnique({
+            where: {
+                id: Number(id)
+            }
+        });
+
+        if (!alunoExistente) {
+            throw new AlunoNaoEncontradoError();
+        }
+
+        await prisma.aluno.delete({
+            where: {
+                id: Number(id)
+            }
+        });
     }
 }
 

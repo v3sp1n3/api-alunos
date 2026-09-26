@@ -19,4 +19,8 @@ router.put("/:id", (request, response) => {
     alunoController.update(request, response);
 });
 
+router.delete("/:id", (request, response) => {
+    alunoController.delete(request, response);
+});
+
 module.exports = router;
