@@ -1,0 +1,9 @@
+node_modules/
+.env
+prisma/dev.db
+*.db
+
+.agents/
+.claude/
+.cursor/
+.devin/
