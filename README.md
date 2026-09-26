@@ -537,6 +537,6 @@ Essa organização permite acompanhar individualmente a implementação de cada 
 
 ## Autor
 
-**Nycolas Silva**
+**Nycolas Guilherme Nunes da Silva**
 
 Projeto desenvolvido para fins acadêmicos.
