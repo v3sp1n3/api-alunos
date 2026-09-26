@@ -40,20 +40,34 @@ class AlunoController {
             });
         }
     }
-    
+
     async findUnique(request, response) {
-    try {
-        const { id } = request.params;
+        try {
+            const { id } = request.params;
 
-        const aluno = await alunoService.findUnique(id);
+            const aluno = await alunoService.findUnique(id);
 
-        return response.status(200).json(aluno);
-    } catch (e) {
-        return response.status(e.statusCode || 500).json({
-            message: e.message
-        });
+            return response.status(200).json(aluno);
+        } catch (e) {
+            return response.status(e.statusCode || 500).json({
+                message: e.message
+            });
+        }
     }
-}
+
+    async update(request, response) {
+        try {
+            const { id } = request.params;
+
+            const aluno = await alunoService.update(id, request.body);
+
+            return response.status(200).json(aluno);
+        } catch (e) {
+            return response.status(e.statusCode || 500).json({
+                message: e.message
+            });
+        }
+    }
 }
 
 module.exports = new AlunoController();

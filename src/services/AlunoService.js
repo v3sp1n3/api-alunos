@@ -43,20 +43,48 @@ class AlunoService {
             total
         };
     }
-    
-    async findUnique(id) {
-    const aluno = await prisma.aluno.findUnique({
-        where: {
-            id: Number(id)
-        }
-    });
 
-    if (!aluno) {
-        throw new AlunoNaoEncontradoError();
+    async findUnique(id) {
+        const aluno = await prisma.aluno.findUnique({
+            where: {
+                id: Number(id)
+            }
+        });
+
+        if (!aluno) {
+            throw new AlunoNaoEncontradoError();
+        }
+
+        return aluno;
     }
 
-    return aluno;
-}
+    async update(id, data) {
+        const alunoExistente = await prisma.aluno.findUnique({
+            where: {
+                id: Number(id)
+            }
+        });
+
+        if (!alunoExistente) {
+            throw new AlunoNaoEncontradoError();
+        }
+
+        if (!data.nome || !data.email) {
+            throw new AlunoInvalidoError();
+        }
+
+        const aluno = await prisma.aluno.update({
+            where: {
+                id: Number(id)
+            },
+            data: {
+                nome: data.nome,
+                email: data.email
+            }
+        });
+
+        return aluno;
+    }
 }
 
 module.exports = new AlunoService();
