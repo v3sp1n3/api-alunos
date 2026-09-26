@@ -1,6 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const { PrismaBetterSqlite3 } = require("@prisma/adapter-better-sqlite3");
 const AlunoInvalidoError = require("../errors/AlunoInvalidoError");
+const AlunoNaoEncontradoError = require("../errors/AlunoNaoEncontradoError");
 
 const adapter = new PrismaBetterSqlite3({
     url: "file:./dev.db"
@@ -42,6 +43,20 @@ class AlunoService {
             total
         };
     }
+    
+    async findUnique(id) {
+    const aluno = await prisma.aluno.findUnique({
+        where: {
+            id: Number(id)
+        }
+    });
+
+    if (!aluno) {
+        throw new AlunoNaoEncontradoError();
+    }
+
+    return aluno;
+}
 }
 
 module.exports = new AlunoService();

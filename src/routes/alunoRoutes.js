@@ -11,4 +11,8 @@ router.post("/", (request, response) => {
     alunoController.create(request, response);
 });
 
+router.get("/:id", (request, response) => {
+    alunoController.findUnique(request, response);
+});
+
 module.exports = router;
